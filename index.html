@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Pembelajaran Hidrokarbon</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:wght@700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+* { font-family: 'Poppins', sans-serif; }
+.title-font { font-family: 'Playfair Display', serif; }
+html, body { height: 100%; margin: 0; overflow: hidden; }
+
+.molecule-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(0,200,255,0.15) 0%, transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,100,200,0.12) 0%, transparent 40%),
+              radial-gradient(circle at 50% 50%, rgba(100,255,150,0.08) 0%, transparent 50%);
+}
+
+.molecule-svg { position: absolute; opacity: 0.15; }
+.glow { animation: glow 3s ease-in-out infinite alternate; }
+@keyframes glow { from { filter: drop-shadow(0 0 5px rgba(0,200,255,0.5)); } to { filter: drop-shadow(0 0 20px rgba(0,200,255,0.8)); } }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
+.float { animation: float 6s ease-in-out infinite; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.fade-in { animation: fadeIn 0.6s ease forwards; }
+
+.nav-item { transition: all 0.3s; cursor: pointer; border-left: 3px solid transparent; }
+.nav-item:hover, .nav-item.active { background: rgba(0,200,255,0.1); border-left-color: #00c8ff; color: #00c8ff; }
+.sub-nav { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.sub-nav.open { max-height: 500px; }
+
+.content-area { overflow-y: auto; scrollbar-width: thin; }
+.content-area::-webkit-scrollbar { width: 6px; }
+.content-area::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+.table-chem { border-collapse: collapse; width: 100%; }
+.table-chem th, .table-chem td { border: 1px solid #334155; padding: 6px 12px; text-align: left; }
+.table-chem th { background: #1e293b; color: #00c8ff; }
+.table-chem tr:nth-child(even) { background: rgba(30,41,59,0.5); }
+
+.quiz-option { transition: all 0.2s; cursor: pointer; border: 1px solid #334155; border-radius: 8px; padding: 10px 14px; }
+.quiz-option:hover { border-color: #00c8ff; background: rgba(0,200,255,0.05); }
+.quiz-option.selected { border-color: #00c8ff; background: rgba(0,200,255,0.15); }
+.quiz-option.correct { border-color: #22c55e; background: rgba(34,197,94,0.15); }
+.quiz-option.wrong { border-color: #ef4444; background: rgba(239,68,68,0.15); }
+
+.model-3d-container { background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; overflow: hidden; }
+.model-3d-container iframe { width: 100%; height: 100%; border: none; }
+
+.tab-btn { transition: all 0.3s; }
+.tab-btn.active { background: linear-gradient(135deg, #00c8ff, #0088cc); color: white; }
+
+.eval-container input { background: #1e293b; border: 1px solid #334155; color: white; padding: 8px 12px; border-radius: 6px; width: 100%; }
+.eval-container input:focus { outline: none; border-color: #00c8ff; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ <script src="/_sdk/telemetry_sdk.js"></script></head>
+ <body class="h-full bg-[#0a0e1a] text-gray-200">
+  <div id="app" class="h-full w-full overflow-hidden"><!-- HOME PAGE -->
+   <div id="page-home" class="h-full w-full relative flex items-center justify-center">
+    <div class="molecule-bg"></div><!-- SVG molecules decoration -->
+    <svg class="molecule-svg float" style="top:10%;left:8%;width:120px" viewbox="0 0 100 100"><circle cx="50" cy="30" r="8" fill="#00c8ff" opacity="0.6" /><circle cx="30" cy="60" r="6" fill="#ff6ec7" opacity="0.6" /><circle cx="70" cy="60" r="6" fill="#7cff6e" opacity="0.6" /> <line x1="50" y1="30" x2="30" y2="60" stroke="#00c8ff" stroke-width="2" opacity="0.5" /><line x1="50" y1="30" x2="70" y2="60" stroke="#00c8ff" stroke-width="2" opacity="0.5" />
+    </svg>
+    <svg class="molecule-svg float" style="top:60%;right:10%;width:150px;animation-delay:2s" viewbox="0 0 120 80"><circle cx="20" cy="40" r="7" fill="#ff6ec7" opacity="0.5" /><circle cx="50" cy="40" r="9" fill="#00c8ff" opacity="0.6" /><circle cx="80" cy="40" r="7" fill="#ff6ec7" opacity="0.5" /><circle cx="110" cy="40" r="6" fill="#7cff6e" opacity="0.5" /> <line x1="20" y1="40" x2="50" y2="40" stroke="#fff" stroke-width="2" opacity="0.3" /><line x1="50" y1="40" x2="80" y2="40" stroke="#fff" stroke-width="2" opacity="0.3" /><line x1="80" y1="40" x2="110" y2="40" stroke="#fff" stroke-width="2" opacity="0.3" />
+    </svg>
+    <svg class="molecule-svg float" style="bottom:15%;left:15%;width:100px;animation-delay:4s" viewbox="0 0 80 80"><circle cx="40" cy="20" r="7" fill="#7cff6e" opacity="0.5" /><circle cx="20" cy="55" r="6" fill="#00c8ff" opacity="0.5" /><circle cx="60" cy="55" r="6" fill="#ff6ec7" opacity="0.5" /> <line x1="40" y1="20" x2="20" y2="55" stroke="#7cff6e" stroke-width="2" opacity="0.4" /><line x1="40" y1="20" x2="60" y2="55" stroke="#7cff6e" stroke-width="2" opacity="0.4" /><line x1="20" y1="55" x2="60" y2="55" stroke="#7cff6e" stroke-width="2" opacity="0.4" />
+    </svg>
+    <div class="text-center z-10 px-6 fade-in">
+     <div class="glow inline-block mb-6">
+      <svg width="80" height="80" viewbox="0 0 80 80"><circle cx="25" cy="40" r="10" fill="none" stroke="#00c8ff" stroke-width="2" /><circle cx="55" cy="40" r="10" fill="none" stroke="#ff6ec7" stroke-width="2" /><line x1="35" y1="40" x2="45" y2="40" stroke="#7cff6e" stroke-width="3" /> <circle cx="25" cy="40" r="3" fill="#00c8ff" /><circle cx="55" cy="40" r="3" fill="#ff6ec7" />
+      </svg>
+     </div>
+     <h1 id="home-title" class="title-font text-5xl md:text-7xl font-black text-white mb-2">HIDROKARBON</h1>
+     <p class="text-xl md:text-2xl font-light text-cyan-300 mb-4">(Alkana, Alkena &amp; Alkuna)</p>
+     <div class="max-w-2xl mx-auto bg-white/5 backdrop-blur rounded-xl p-4 mb-6 border border-white/10">
+      <p class="text-sm text-gray-300 leading-relaxed">Peserta Didik mampu menjelaskan senyawa karbon dan makromolekul serta penerapannya dalam kehidupan sehari-hari</p>
+     </div>
+     <div class="mb-8">
+      <p id="home-author" class="text-gray-400 text-sm">Penyusun: <span class="text-cyan-400 font-medium">Dedi Erlangga, S. Pd.</span></p>
+      <p class="text-gray-500 text-xs">SMAN 1 Kapuas Hulu</p>
+     </div><button onclick="showMain()" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30"> Mulai Belajar <i data-lucide="arrow-right" class="inline w-5 h-5 ml-1"></i> </button>
+    </div>
+   </div><!-- MAIN PAGE (3 columns) -->
+   <div id="page-main" class="h-full w-full hidden">
+    <div class="h-full flex"><!-- Column 1: Navigation -->
+     <div class="w-64 min-w-[220px] bg-[#0d1221] border-r border-slate-800 flex flex-col h-full overflow-y-auto">
+      <div class="p-4 border-b border-slate-800"><button onclick="showHome()" class="flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition mb-2"><i data-lucide="home" class="w-4 h-4"></i> Beranda</button>
+       <h2 class="text-lg font-bold text-white">Menu</h2>
+      </div>
+      <nav class="flex-1 py-2">
+       <div class="nav-item px-4 py-2 text-sm" onclick="showContent('tujuan')">
+        <i data-lucide="target" class="w-4 h-4 inline mr-2"></i>Tujuan Pembelajaran
+       </div>
+       <div class="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider mt-2">
+        Sub Pokok Materi
+       </div>
+       <div>
+        <div class="nav-item px-4 py-2 text-sm flex justify-between items-center" onclick="toggleSub('alkana')">
+         <span><i data-lucide="atom" class="w-4 h-4 inline mr-2"></i>Alkana</span><i data-lucide="chevron-down" class="w-4 h-4 sub-chevron" id="chev-alkana"></i>
+        </div>
+        <div class="sub-nav pl-8" id="sub-alkana">
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkana-pendahuluan')">
+          Pendahuluan
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkana-rumus')">
+          Rumus &amp; Deret Homolog
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkana-tatanama')">
+          Tata Nama
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkana-reaksi')">
+          Reaksi Kimia
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkana-isomer')">
+          Isomer
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkana-manfaat')">
+          Contoh &amp; Manfaat
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkana-soal')">
+          Latihan Soal
+         </div>
+        </div>
+       </div>
+       <div>
+        <div class="nav-item px-4 py-2 text-sm flex justify-between items-center" onclick="toggleSub('alkena')">
+         <span><i data-lucide="atom" class="w-4 h-4 inline mr-2"></i>Alkena</span><i data-lucide="chevron-down" class="w-4 h-4 sub-chevron" id="chev-alkena"></i>
+        </div>
+        <div class="sub-nav pl-8" id="sub-alkena">
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkena-pendahuluan')">
+          Pendahuluan
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkena-rumus')">
+          Rumus &amp; Deret Homolog
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkena-tatanama')">
+          Tata Nama
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkena-reaksi')">
+          Reaksi Kimia
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkena-isomer')">
+          Isomer
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkena-manfaat')">
+          Contoh &amp; Manfaat
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkena-soal')">
+          Latihan Soal
+         </div>
+        </div>
+       </div>
+       <div>
+        <div class="nav-item px-4 py-2 text-sm flex justify-between items-center" onclick="toggleSub('alkuna')">
+         <span><i data-lucide="atom" class="w-4 h-4 inline mr-2"></i>Alkuna</span><i data-lucide="chevron-down" class="w-4 h-4 sub-chevron" id="chev-alkuna"></i>
+        </div>
+        <div class="sub-nav pl-8" id="sub-alkuna">
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkuna-pendahuluan')">
+          Pendahuluan
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkuna-rumus')">
+          Rumus &amp; Deret Homolog
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkuna-tatanama')">
+          Tata Nama
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkuna-reaksi')">
+          Reaksi Kimia
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkuna-isomer')">
+          Isomer
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkuna-manfaat')">
+          Contoh &amp; Manfaat
+         </div>
+         <div class="nav-item px-3 py-1.5 text-xs" onclick="showContent('alkuna-soal')">
+          Latihan Soal
+         </div>
+        </div>
+       </div>
+       <div class="mt-2 border-t border-slate-800 pt-2">
+        <div class="nav-item px-4 py-2 text-sm" onclick="showContent('evaluasi')">
+         <i data-lucide="clipboard-check" class="w-4 h-4 inline mr-2"></i>Evaluasi (25 Soal)
+        </div>
+       </div>
+      </nav>
+     </div><!-- Column 2: Content -->
+     <div class="flex-1 h-full overflow-hidden flex flex-col">
+      <div class="h-1 bg-gradient-to-r from-cyan-500 via-pink-500 to-green-500"></div>
+      <div id="content-area" class="content-area flex-1 p-6 overflow-y-auto"><!-- Default welcome -->
+       <div id="content-welcome" class="fade-in">
+        <h2 class="text-2xl font-bold text-white mb-4">Selamat Datang! 👋</h2>
+        <p class="text-gray-300 mb-4">Pilih menu di sebelah kiri untuk mulai mempelajari materi Hidrokarbon.</p>
+        <div class="grid grid-cols-3 gap-4 mt-6">
+         <div class="bg-gradient-to-br from-cyan-900/40 to-cyan-700/20 rounded-xl p-4 border border-cyan-800/50 text-center">
+          <div class="text-3xl mb-2">
+           ⛽
+          </div>
+          <h3 class="font-semibold text-cyan-300">Alkana</h3>
+          <p class="text-xs text-gray-400 mt-1">Ikatan Tunggal</p>
+         </div>
+         <div class="bg-gradient-to-br from-pink-900/40 to-pink-700/20 rounded-xl p-4 border border-pink-800/50 text-center">
+          <div class="text-3xl mb-2">
+           🧪
+          </div>
+          <h3 class="font-semibold text-pink-300">Alkena</h3>
+          <p class="text-xs text-gray-400 mt-1">Ikatan Rangkap Dua</p>
+         </div>
+         <div class="bg-gradient-to-br from-green-900/40 to-green-700/20 rounded-xl p-4 border border-green-800/50 text-center">
+          <div class="text-3xl mb-2">
+           🔥
+          </div>
+          <h3 class="font-semibold text-green-300">Alkuna</h3>
+          <p class="text-xs text-gray-400 mt-1">Ikatan Rangkap Tiga</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Column 3: 3D Model -->
+     <div class="w-80 min-w-[300px] bg-[#0d1221] border-l border-slate-800 flex flex-col h-full">
+      <div class="p-3 border-b border-slate-800">
+       <h3 class="text-sm font-semibold text-white mb-2"><i data-lucide="box" class="w-4 h-4 inline mr-1"></i> Model Molekul 3D</h3>
+       <div class="flex gap-1"><button class="tab-btn active text-xs px-3 py-1 rounded-full bg-slate-700 text-gray-300" onclick="switchModelTab('alkana',this)">Alkana</button> <button class="tab-btn text-xs px-3 py-1 rounded-full bg-slate-700 text-gray-300" onclick="switchModelTab('alkena',this)">Alkena</button> <button class="tab-btn text-xs px-3 py-1 rounded-full bg-slate-700 text-gray-300" onclick="switchModelTab('alkuna',this)">Alkuna</button>
+       </div>
+      </div>
+      <div class="p-3 border-b border-slate-800"><select id="model-select" onchange="changeModel()" class="w-full bg-[#1e293b] border border-slate-700 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-cyan-500"> </select>
+      </div>
+      <div class="flex-1 p-3 flex flex-col min-h-0">
+       <div id="model-viewer" class="model-3d-container flex-1 min-h-0 relative"><iframe id="model-iframe" src="https://viewer-edu.assemblrworld.com/Embed/-g6CpVmXe8R5tHe7CJ7f" allow="fullscreen" allowfullscreen class="w-full h-full"></iframe> <button onclick="toggleFullModel()" class="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white p-1.5 rounded-lg transition" title="Perbesar"><i data-lucide="maximize-2" class="w-4 h-4"></i></button>
+       </div>
+       <div id="model-info" class="mt-3 bg-slate-800/50 rounded-lg p-3">
+        <h4 id="model-name" class="text-sm font-bold text-cyan-300">Metana (CH₄)</h4>
+        <p id="model-desc" class="text-xs text-gray-400 mt-1">Komponen utama gas alam, digunakan sebagai bahan bakar rumah tangga dan pembangkit listrik.</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- Fullscreen model overlay -->
+    <div id="model-fullscreen" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-8">
+     <div class="w-full h-full max-w-5xl relative"><button onclick="toggleFullModel()" class="absolute top-2 right-2 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-lg"><i data-lucide="x" class="w-5 h-5"></i></button> <iframe id="model-iframe-full" src="" allow="fullscreen" allowfullscreen class="w-full h-full rounded-xl"></iframe>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+// Config and SDK
+const defaultConfig = {
+  main_title: 'HIDROKARBON',
+  author_name: 'Dedi Erlangga, S. Pd.',
+  background_color: '#0a0e1a',
+  surface_color: '#0d1221',
+  text_color: '#e2e8f0',
+  primary_action_color: '#00c8ff',
+  secondary_action_color: '#ff6ec7'
+};
+
+function applyConfig(config) {
+  const el = document.getElementById('home-title');
+  if (el) el.textContent = config.main_title || defaultConfig.main_title;
+  const author = document.getElementById('home-author');
+  if (author) author.innerHTML = `Penyusun: <span class="text-cyan-400 font-medium">${config.author_name || defaultConfig.author_name}</span>`;
+}
+
+if (window.elementSdk) {
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => { applyConfig(config); },
+    mapToCapabilities: (config) => ({
+      recolorables: [
+        { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+        { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+        { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+      ],
+      borderables: [],
+      fontEditable: undefined,
+      fontSizeable: undefined
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ['main_title', config.main_title || defaultConfig.main_title],
+      ['author_name', config.author_name || defaultConfig.author_name]
+    ])
+  });
+}
+
+// Navigation
+function showHome() { document.getElementById('page-home').classList.remove('hidden'); document.getElementById('page-main').classList.add('hidden'); }
+function showMain() { document.getElementById('page-home').classList.add('hidden'); document.getElementById('page-main').classList.remove('hidden'); lucide.createIcons(); }
+
+function toggleSub(name) {
+  const el = document.getElementById('sub-' + name);
+  el.classList.toggle('open');
+  const chev = document.getElementById('chev-' + name);
+  chev.style.transform = el.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+// 3D Models data
+const models = {
+  alkana: [
+    { name: 'Metana (CH₄)', src: 'https://viewer-edu.assemblrworld.com/Embed/-g6CpVmXe8R5tHe7CJ7f', desc: 'Komponen utama gas alam (LNG) dan biogas. Digunakan sebagai bahan bakar rumah tangga dan pembangkit listrik. Rumus: CH₄, Mr = 16.' },
+    { name: 'Pentana (C₅H₁₂)', src: 'https://viewer-edu.assemblrworld.com/Embed/-ERaiedpfRwbGXjL2TXw', desc: 'Pelarut organik non-polar. Digunakan dalam laboratorium dan industri. Titik didih 36°C. Berwujud cair pada suhu kamar.' },
+    { name: 'Dekana (C₁₀H₂₂)', src: 'https://viewer-edu.assemblrworld.com/Embed/-3nW7sF44gixdgfjeFS9', desc: 'Komponen minyak tanah (kerosene). Titik didih 174°C. Digunakan sebagai bahan bakar jet dan pelarut industri.' }
+  ],
+  alkena: [
+    { name: 'Etena (C₂H₄)', src: 'https://viewer-edu.assemblrworld.com/Embed/-l8GwXfoCAfQFiwcgJzl', desc: 'Bahan baku plastik polietilena (PE). Hormon gas etilen untuk pematangan buah. Senyawa alkena paling sederhana.' },
+    { name: 'Butena (C₄H₈)', src: 'https://viewer-edu.assemblrworld.com/Embed/-PxomXfTQQ7HKVSvjzK4', desc: 'Digunakan dalam sintesis polimer dan bahan bakar. Memiliki isomer posisi (1-butena dan 2-butena) serta isomer geometri.' },
+    { name: 'Pentena (C₅H₁₀)', src: 'https://viewer-edu.assemblrworld.com/Embed/-pSQ5FqSSsRLSA95vmQV', desc: 'Digunakan sebagai bahan baku dalam industri petrokimia. Memiliki beberapa isomer rangka dan posisi.' }
+  ],
+  alkuna: [
+    { name: 'Etuna (C₂H₂)', src: 'https://viewer-edu.assemblrworld.com/Embed/-JrKmlm2g85mr6f8LPU8', desc: 'Gas asetilena/karbit. Pembakaran dengan O₂ menghasilkan suhu ~3000°C untuk pengelasan logam. Alkuna paling sederhana.' },
+    { name: 'Pentuna (C₅H₈)', src: 'https://viewer-edu.assemblrworld.com/Embed/-nXnx7ETzxQZHRjRQ8se', desc: 'Alkuna dengan 5 atom karbon. Digunakan dalam sintesis organik. Memiliki isomer posisi (1-pentuna dan 2-pentuna).' },
+    { name: 'Heptuna (C₇H₁₂)', src: 'https://viewer-edu.assemblrworld.com/Embed/-mPh2kHK2pJ9auWGX5hw', desc: 'Alkuna dengan 7 atom karbon. Digunakan sebagai intermediet dalam sintesis senyawa organik kompleks.' }
+  ]
+};
+
+let currentModelTab = 'alkana';
+let currentModelIdx = 0;
+
+function switchModelTab(tab, btn) {
+  currentModelTab = tab; currentModelIdx = 0;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  populateModelSelect();
+  updateModel();
+}
+
+function populateModelSelect() {
+  const sel = document.getElementById('model-select');
+  sel.innerHTML = models[currentModelTab].map((m, i) => `<option value="${i}">${m.name}</option>`).join('');
+}
+
+function changeModel() {
+  currentModelIdx = parseInt(document.getElementById('model-select').value);
+  updateModel();
+}
+
+function updateModel() {
+  const m = models[currentModelTab][currentModelIdx];
+  document.getElementById('model-iframe').src = m.src;
+  document.getElementById('model-name').textContent = m.name;
+  document.getElementById('model-desc').textContent = m.desc;
+}
+
+function toggleFullModel() {
+  const overlay = document.getElementById('model-fullscreen');
+  if (overlay.classList.contains('hidden')) {
+    overlay.classList.remove('hidden');
+    document.getElementById('model-iframe-full').src = models[currentModelTab][currentModelIdx].src;
+  } else {
+    overlay.classList.add('hidden');
+    document.getElementById('model-iframe-full').src = '';
+  }
+  lucide.createIcons();
+}
+
+// Content rendering
+const contentData = {
+  tujuan: () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-4">🎯 Tujuan Pembelajaran</h2><div class="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-xl p-5 border border-cyan-800/30"><p class="text-gray-200 leading-relaxed">Peserta didik mampu <strong class="text-cyan-300">menjelaskan senyawa karbon dan makromolekul</strong> serta <strong class="text-cyan-300">penerapannya dalam kehidupan sehari-hari</strong>.</p></div><h3 class="text-lg font-semibold text-white mt-6 mb-3">📚 Sub Pokok Materi:</h3><div class="space-y-2"><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">1</span><span>Alkana (Ikatan Tunggal)</span></div><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-pink-500/20 text-pink-400 text-sm font-bold">2</span><span>Alkena (Ikatan Rangkap Dua)</span></div><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-green-500/20 text-green-400 text-sm font-bold">3</span><span>Alkuna (Ikatan Rangkap Tiga)</span></div></div></div>`,
+
+  'alkana-pendahuluan': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkana</h2><p class="text-cyan-400 text-sm mb-4">Sub Unit 1 — Pendahuluan</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">A. Mengenal Senyawa</h3><p class="text-gray-300 leading-relaxed mb-3">Alkana adalah senyawa hidrokarbon <strong class="text-cyan-300">alifatik jenuh</strong>, yang berarti seluruh ikatan antar atom karbonnya merupakan <strong class="text-cyan-300">ikatan tunggal</strong> (C–C).</p><p class="text-gray-300 leading-relaxed">Karena seluruh tangannya telah terikat penuh oleh hidrogen atau karbon lain, alkana bersifat relatif stabil dan kurang reaktif dibandingkan alkena atau alkuna.</p><div class="mt-4 p-3 bg-cyan-900/20 rounded-lg border border-cyan-800/30"><p class="text-xs text-cyan-300">💡 Kata "jenuh" berarti semua ikatan karbon sudah "penuh" — tidak ada lagi ruang untuk menambah atom tanpa membuang yang sudah ada.</p></div></div></div>`,
+
+  'alkana-rumus': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkana</h2><p class="text-cyan-400 text-sm mb-4">Rumus Umum & Deret Homolog</p><div class="bg-slate-800/50 rounded-xl p-5 mb-4"><h3 class="text-lg font-semibold text-white mb-3">B. Rumus Umum</h3><div class="text-center py-4 bg-slate-900 rounded-lg"><span class="text-3xl font-bold text-cyan-300">C<sub>n</sub>H<sub>2n+2</sub></span><p class="text-gray-400 text-sm mt-2">di mana n = jumlah atom karbon (n ≥ 1)</p></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">C. Deret Homolog (C1 – C10)</h3><table class="table-chem text-sm"><thead><tr><th>Rumus Molekul</th><th>Nama Alkana</th></tr></thead><tbody><tr><td>CH₄</td><td>Metana</td></tr><tr><td>C₂H₆</td><td>Etana</td></tr><tr><td>C₃H₈</td><td>Propana</td></tr><tr><td>C₄H₁₀</td><td>Butana</td></tr><tr><td>C₅H₁₂</td><td>Pentana</td></tr><tr><td>C₆H₁₄</td><td>Heksana</td></tr><tr><td>C₇H₁₆</td><td>Heptana</td></tr><tr><td>C₈H₁₈</td><td>Oktana</td></tr><tr><td>C₉H₂₀</td><td>Nonana</td></tr><tr><td>C₁₀H₂₂</td><td>Dekana</td></tr></tbody></table></div></div>`,
+
+  'alkana-tatanama': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkana</h2><p class="text-cyan-400 text-sm mb-4">Tata Nama IUPAC</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">Aturan Penamaan Alkana</h3><ol class="space-y-3 text-gray-300 text-sm list-decimal pl-5"><li>Tentukan rantai karbon <strong class="text-cyan-300">terpanjang</strong> sebagai rantai utama</li><li>Beri nomor dari ujung yang paling dekat dengan <strong class="text-cyan-300">cabang</strong></li><li>Tuliskan nomor dan nama cabang di depan nama rantai utama</li><li>Jika cabang lebih dari satu jenis yang sama, gunakan awalan: di-, tri-, tetra-</li><li>Jika cabang berbeda jenis, urutkan secara <strong class="text-cyan-300">alfabet</strong></li></ol><div class="mt-4 p-4 bg-slate-900 rounded-lg"><p class="text-sm text-gray-300 mb-2"><strong>Contoh:</strong></p><p class="text-cyan-300 font-mono">CH₃-CH(CH₃)-CH₂-CH₃</p><p class="text-gray-400 text-xs mt-1">→ Rantai terpanjang: 4C (butana), cabang metil di C-2</p><p class="text-white font-semibold mt-1">Nama: 2-metilbutana</p></div></div></div>`,
+
+  'alkana-reaksi': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkana</h2><p class="text-cyan-400 text-sm mb-4">Reaksi Kimia</p><div class="space-y-4"><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">1. Reaksi Substitusi</h3><p class="text-gray-300 text-sm mb-2">Penggantian atom H dengan atom/gugus lain (biasanya halogen). Membutuhkan sinar UV.</p><div class="bg-slate-900 rounded-lg p-3 text-center"><span class="text-cyan-300 font-mono text-sm">CH₄ + Cl₂ → CH₃Cl + HCl</span></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">2. Reaksi Pembakaran</h3><p class="text-gray-300 text-sm mb-2"><strong>Sempurna:</strong> menghasilkan CO₂ + H₂O</p><div class="bg-slate-900 rounded-lg p-3 text-center"><span class="text-cyan-300 font-mono text-sm">CH₄ + 2O₂ → CO₂ + 2H₂O + Energi</span></div><p class="text-gray-300 text-sm mt-2"><strong>Tidak Sempurna:</strong> kekurangan O₂, menghasilkan CO atau C (jelaga)</p></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">3. Reaksi Eliminasi (Cracking)</h3><p class="text-gray-300 text-sm mb-2">Pemutusan ikatan tunggal menjadi rangkap dengan melepas H₂. Digunakan di industri minyak bumi.</p><div class="bg-slate-900 rounded-lg p-3 text-center"><span class="text-cyan-300 font-mono text-sm">CH₃-CH₃ → CH₂=CH₂ + H₂</span></div></div></div></div>`,
+
+  'alkana-isomer': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkana</h2><p class="text-cyan-400 text-sm mb-4">Isomer</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">Isomer Rangka (Struktur)</h3><p class="text-gray-300 text-sm mb-3">Alkana hanya mengalami <strong class="text-cyan-300">isomer rangka</strong> — rumus molekul sama, tetapi susunan rantai karbon berbeda (lurus vs bercabang).</p><div class="p-3 bg-cyan-900/20 rounded-lg border border-cyan-800/30 mb-4"><p class="text-xs text-cyan-300">💡 Isomer alkana dimulai pada C ≥ 4 (Butana)</p></div><h4 class="font-semibold text-white mb-2">Contoh: Butana (C₄H₁₀) — 2 isomer</h4><div class="space-y-2"><div class="bg-slate-900 rounded-lg p-3"><p class="text-sm text-gray-300"><strong>1. n-butana</strong> (rantai lurus)</p><p class="text-cyan-300 font-mono text-sm">CH₃-CH₂-CH₂-CH₃</p></div><div class="bg-slate-900 rounded-lg p-3"><p class="text-sm text-gray-300"><strong>2. 2-metilpropana</strong> (bercabang)</p><p class="text-cyan-300 font-mono text-sm">CH₃-CH(CH₃)-CH₃</p></div></div><div class="mt-4 p-3 bg-pink-900/20 rounded-lg border border-pink-800/30"><p class="text-xs text-pink-300">🔢 Jumlah isomer bertambah drastis: C₅=3, C₆=5, C₁₀=75 isomer!</p></div></div></div>`,
+
+  'alkana-manfaat': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkana</h2><p class="text-cyan-400 text-sm mb-4">Contoh & Manfaat</p><div class="space-y-3"><div class="bg-slate-800/50 rounded-xl p-4 border-l-4 border-cyan-500"><h4 class="font-semibold text-white">Metana (CH₄)</h4><p class="text-gray-300 text-sm mt-1">Komponen utama gas alam (LNG) dan biogas, digunakan sebagai bahan bakar rumah tangga dan pembangkit listrik.</p></div><div class="bg-slate-800/50 rounded-xl p-4 border-l-4 border-pink-500"><h4 class="font-semibold text-white">Propana (C₃H₈) & Butana (C₄H₁₀)</h4><p class="text-gray-300 text-sm mt-1">Komponen utama gas elpiji (LPG) untuk memasak.</p></div><div class="bg-slate-800/50 rounded-xl p-4 border-l-4 border-green-500"><h4 class="font-semibold text-white">Oktana (C₈H₁₈)</h4><p class="text-gray-300 text-sm mt-1">Komponen standar penentu kualitas bahan bakar bensin (nilai oktan).</p></div></div></div>`,
+
+  'alkana-soal': () => renderQuiz('alkana'),
+  'alkena-pendahuluan': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkena</h2><p class="text-pink-400 text-sm mb-4">Sub Unit 2 — Pendahuluan</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">A. Mengenal Senyawa</h3><p class="text-gray-300 leading-relaxed mb-3">Alkena adalah senyawa hidrokarbon <strong class="text-pink-300">alifatik tidak jenuh</strong> yang memiliki setidaknya satu <strong class="text-pink-300">ikatan rangkap dua</strong> (C=C) di antara atom-atom karbonnya.</p><p class="text-gray-300 leading-relaxed">Karena adanya ikatan rangkap dua ini, alkena jauh lebih reaktif daripada alkana dan siap mengalami reaksi pemutusan ikatan (adisi).</p></div></div>`,
+
+  'alkena-rumus': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkena</h2><p class="text-pink-400 text-sm mb-4">Rumus Umum & Deret Homolog</p><div class="bg-slate-800/50 rounded-xl p-5 mb-4"><h3 class="text-lg font-semibold text-white mb-3">B. Rumus Umum</h3><div class="text-center py-4 bg-slate-900 rounded-lg"><span class="text-3xl font-bold text-pink-300">C<sub>n</sub>H<sub>2n</sub></span><p class="text-gray-400 text-sm mt-2">di mana n = jumlah atom karbon (n ≥ 2)</p></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">C. Deret Homolog (C2 – C10)</h3><table class="table-chem text-sm"><thead><tr><th>Rumus Molekul</th><th>Nama Alkena</th></tr></thead><tbody><tr><td>C₂H₄</td><td>Etena</td></tr><tr><td>C₃H₆</td><td>Propena</td></tr><tr><td>C₄H₈</td><td>Butena</td></tr><tr><td>C₅H₁₀</td><td>Pentena</td></tr><tr><td>C₆H₁₂</td><td>Heksena</td></tr><tr><td>C₇H₁₄</td><td>Heptena</td></tr><tr><td>C₈H₁₆</td><td>Oktena</td></tr><tr><td>C₉H₁₈</td><td>Nonena</td></tr><tr><td>C₁₀H₂₀</td><td>Dekena</td></tr></tbody></table></div></div>`,
+
+  'alkena-tatanama': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkena</h2><p class="text-pink-400 text-sm mb-4">Tata Nama IUPAC</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">Aturan Penamaan Alkena</h3><ol class="space-y-3 text-gray-300 text-sm list-decimal pl-5"><li>Tentukan rantai karbon terpanjang yang <strong class="text-pink-300">melewati ikatan rangkap</strong></li><li>Beri nomor dari ujung yang paling <strong class="text-pink-300">dekat dengan ikatan rangkap</strong></li><li>Posisi ikatan rangkap ditunjukkan dengan nomor atom C terkecil</li><li>Cabang dinamai seperti pada alkana</li></ol><div class="mt-4 p-4 bg-slate-900 rounded-lg"><p class="text-sm text-gray-300 mb-2"><strong>Contoh:</strong></p><p class="text-pink-300 font-mono">CH₃-CH=C(CH₃)-CH₂-CH₃</p><p class="text-gray-400 text-xs mt-1">→ Rantai terpanjang: 5C (pentena), ikatan rangkap di C-2, cabang metil di C-3</p><p class="text-white font-semibold mt-1">Nama: 3-metil-2-pentena</p></div></div></div>`,
+
+  'alkena-reaksi': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkena</h2><p class="text-pink-400 text-sm mb-4">Reaksi Kimia</p><div class="space-y-4"><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">1. Reaksi Adisi</h3><p class="text-gray-300 text-sm mb-2">Ikatan rangkap dua berubah menjadi tunggal karena masuknya atom baru.</p><div class="space-y-2"><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">Hidrogenasi:</p><span class="text-pink-300 font-mono text-sm">CH₂=CH₂ + H₂ → CH₃-CH₃</span></div><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">Halogenasi (uji ikatan rangkap):</p><span class="text-pink-300 font-mono text-sm">CH₂=CH₂ + Br₂ → CH₂Br-CH₂Br</span></div></div><div class="mt-3 p-3 bg-pink-900/20 rounded-lg border border-pink-800/30"><p class="text-xs text-pink-300">⚡ Aturan Markovnikov: Pada adisi HX, atom H terikat pada C rangkap yang sudah mengikat H lebih banyak.</p></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">2. Reaksi Polimerisasi</h3><p class="text-gray-300 text-sm">Penggabungan monomer alkena menjadi polimer. Contoh: etena → polietilena (plastik PE).</p></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">3. Reaksi Pembakaran</h3><p class="text-gray-300 text-sm">Menghasilkan CO₂ dan H₂O. Nyala cenderung lebih berjelaga karena kadar C lebih tinggi.</p></div></div></div>`,
+
+  'alkena-isomer': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkena</h2><p class="text-pink-400 text-sm mb-4">Isomer</p><div class="space-y-4"><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">A. Isomer Rangka</h3><p class="text-gray-300 text-sm">Rantai utamanya berbeda namun posisi ikatan rangkap tetap.</p><p class="text-gray-400 text-xs mt-2">Contoh C₄H₈: 1-butena ↔ 2-metil-1-propena</p></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">B. Isomer Posisi</h3><p class="text-gray-300 text-sm mb-2">Rangka sama, posisi ikatan rangkap berpindah.</p><div class="grid grid-cols-2 gap-2"><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">1-butena</p><p class="text-pink-300 font-mono text-xs">CH₂=CH-CH₂-CH₃</p></div><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">2-butena</p><p class="text-pink-300 font-mono text-xs">CH₃-CH=CH-CH₃</p></div></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">C. Isomer Geometri (Cis-Trans)</h3><p class="text-gray-300 text-sm mb-2">Terjadi karena ikatan rangkap bersifat kaku (tidak berputar bebas).</p><div class="grid grid-cols-2 gap-2"><div class="bg-slate-900 rounded-lg p-3 text-center"><p class="text-pink-300 font-bold">Cis</p><p class="text-xs text-gray-400">Gugus sama di sisi yang sama</p></div><div class="bg-slate-900 rounded-lg p-3 text-center"><p class="text-pink-300 font-bold">Trans</p><p class="text-xs text-gray-400">Gugus sama di sisi berlawanan</p></div></div></div></div></div>`,
+
+  'alkena-manfaat': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkena</h2><p class="text-pink-400 text-sm mb-4">Contoh & Manfaat</p><div class="space-y-3"><div class="bg-slate-800/50 rounded-xl p-4 border-l-4 border-pink-500"><h4 class="font-semibold text-white">Etena (C₂H₄)</h4><p class="text-gray-300 text-sm mt-1">Bahan baku plastik polietilena (PE). Hormon gas etilen untuk mempercepat pematangan buah.</p></div><div class="bg-slate-800/50 rounded-xl p-4 border-l-4 border-purple-500"><h4 class="font-semibold text-white">Propena (C₃H₆)</h4><p class="text-gray-300 text-sm mt-1">Bahan baku polipropilena (PP) — plastik botol, wadah makanan, dan serat karpet.</p></div></div></div>`,
+
+  'alkena-soal': () => renderQuiz('alkena'),
+
+  'alkuna-pendahuluan': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkuna</h2><p class="text-green-400 text-sm mb-4">Sub Unit 3 — Pendahuluan</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">A. Mengenal Senyawa</h3><p class="text-gray-300 leading-relaxed mb-3">Alkuna adalah senyawa hidrokarbon <strong class="text-green-300">alifatik tidak jenuh</strong> yang memiliki setidaknya satu <strong class="text-green-300">ikatan rangkap tiga</strong> (C≡C) di antara atom karbonnya.</p><p class="text-gray-300 leading-relaxed">Ikatan rangkap tiga membuat alkuna memiliki energi ikatan sangat tinggi, sangat reaktif, dan mampu mengalami dua kali reaksi adisi.</p></div></div>`,
+
+  'alkuna-rumus': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkuna</h2><p class="text-green-400 text-sm mb-4">Rumus Umum & Deret Homolog</p><div class="bg-slate-800/50 rounded-xl p-5 mb-4"><h3 class="text-lg font-semibold text-white mb-3">B. Rumus Umum</h3><div class="text-center py-4 bg-slate-900 rounded-lg"><span class="text-3xl font-bold text-green-300">C<sub>n</sub>H<sub>2n-2</sub></span><p class="text-gray-400 text-sm mt-2">di mana n = jumlah atom karbon (n ≥ 2)</p></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">C. Deret Homolog (C2 – C10)</h3><table class="table-chem text-sm"><thead><tr><th>Rumus Molekul</th><th>Nama Alkuna</th></tr></thead><tbody><tr><td>C₂H₂</td><td>Etuna</td></tr><tr><td>C₃H₄</td><td>Propuna</td></tr><tr><td>C₄H₆</td><td>Butuna</td></tr><tr><td>C₅H₈</td><td>Pentuna</td></tr><tr><td>C₆H₁₀</td><td>Heksuna</td></tr><tr><td>C₇H₁₂</td><td>Heptuna</td></tr><tr><td>C₈H₁₄</td><td>Oktuna</td></tr><tr><td>C₉H₁₆</td><td>Nonuna</td></tr><tr><td>C₁₀H₁₈</td><td>Dekuna</td></tr></tbody></table></div></div>`,
+
+  'alkuna-tatanama': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkuna</h2><p class="text-green-400 text-sm mb-4">Tata Nama IUPAC</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">Aturan Penamaan Alkuna</h3><ol class="space-y-3 text-gray-300 text-sm list-decimal pl-5"><li>Tentukan rantai karbon terpanjang yang <strong class="text-green-300">melewati ikatan rangkap tiga</strong></li><li>Beri nomor dari ujung yang paling <strong class="text-green-300">dekat dengan ikatan rangkap tiga</strong></li><li>Akhiran rantai utama diganti dari "-ana" menjadi <strong class="text-green-300">"-una"</strong></li></ol><div class="mt-4 p-4 bg-slate-900 rounded-lg"><p class="text-sm text-gray-300 mb-2"><strong>Contoh:</strong></p><p class="text-green-300 font-mono">CH≡C-CH(CH₃)-CH₃</p><p class="text-gray-400 text-xs mt-1">→ Rantai terpanjang: 4C (butuna), ikatan rangkap tiga di C-1, cabang metil di C-3</p><p class="text-white font-semibold mt-1">Nama: 3-metil-1-butuna</p></div></div></div>`,
+
+  'alkuna-reaksi': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkuna</h2><p class="text-green-400 text-sm mb-4">Reaksi Kimia</p><div class="space-y-4"><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">1. Reaksi Adisi Dua Tahap</h3><p class="text-gray-300 text-sm mb-3">Alkuna dapat mengalami adisi 2x hingga menjadi ikatan tunggal.</p><div class="space-y-2"><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">Tahap 1: Alkuna → Alkena</p><span class="text-green-300 font-mono text-sm">CH≡CH + H₂ → CH₂=CH₂</span></div><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">Tahap 2: Alkena → Alkana</p><span class="text-green-300 font-mono text-sm">CH₂=CH₂ + H₂ → CH₃-CH₃</span></div></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">2. Reaksi Pembakaran</h3><p class="text-gray-300 text-sm">Menghasilkan panas sangat besar. Pembakaran etuna + O₂ menghasilkan suhu ~3000°C (las karbit).</p></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">3. Sifat Asam Lemah (Terminal)</h3><p class="text-gray-300 text-sm">Alkuna terminal (R-C≡C-H) memiliki H yang bersifat agak asam, dapat diganti logam Na atau Ag.</p></div></div></div>`,
+
+  'alkuna-isomer': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkuna</h2><p class="text-green-400 text-sm mb-4">Isomer</p><div class="space-y-4"><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">A. Isomer Rangka</h3><p class="text-gray-300 text-sm">Rumus molekul sama, kerangka karbon berbeda.</p><p class="text-gray-400 text-xs mt-2">Contoh C₅H₈: 1-pentuna ↔ 3-metil-1-butuna</p></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">B. Isomer Posisi</h3><p class="text-gray-300 text-sm mb-2">Posisi ikatan rangkap tiga berpindah.</p><div class="grid grid-cols-2 gap-2"><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">1-butuna</p><p class="text-green-300 font-mono text-xs">CH≡C-CH₂-CH₃</p></div><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">2-butuna</p><p class="text-green-300 font-mono text-xs">CH₃-C≡C-CH₃</p></div></div></div><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-2">C. Isomer Fungsi</h3><p class="text-gray-300 text-sm mb-2">Alkuna berisomer fungsi dengan <strong class="text-green-300">alkadiena</strong> (rumus umum sama: C<sub>n</sub>H<sub>2n-2</sub>).</p><div class="bg-slate-900 rounded-lg p-3"><p class="text-xs text-gray-400">1-butuna ↔ 1,3-butadiena (CH₂=CH-CH=CH₂)</p></div></div><div class="p-3 bg-green-900/20 rounded-lg border border-green-800/30"><p class="text-xs text-green-300">⚠️ Alkuna TIDAK memiliki isomer geometri karena bentuk ikatan rangkap tiga bersifat linier.</p></div></div></div>`,
+
+  'alkuna-manfaat': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkuna</h2><p class="text-green-400 text-sm mb-4">Contoh & Manfaat</p><div class="bg-slate-800/50 rounded-xl p-4 border-l-4 border-green-500"><h4 class="font-semibold text-white">Etuna / Asetilena (C₂H₂)</h4><p class="text-gray-300 text-sm mt-1">Lebih dikenal sebagai gas karbit. Pembakaran dengan O₂ murni menghasilkan api bersuhu ~3000°C untuk pengelasan dan pemotongan logam.</p></div><div class="mt-4 bg-slate-800/50 rounded-xl p-5"><h3 class="font-semibold text-white mb-3">Ringkasan Perbedaan Reaksi</h3><table class="table-chem text-sm"><thead><tr><th>Jenis</th><th>Reaksi Utama</th><th>Karakteristik</th></tr></thead><tbody><tr><td>Alkana</td><td>Substitusi</td><td>Tetap ikatan tunggal</td></tr><tr><td>Alkena</td><td>Adisi 1 Tahap</td><td>Rangkap 2 → Tunggal</td></tr><tr><td>Alkuna</td><td>Adisi 2 Tahap</td><td>Rangkap 3 → 2 → Tunggal</td></tr></tbody></table></div></div>`,
+
+  'alkuna-soal': () => renderQuiz('alkuna'),
+  'evaluasi': () => renderEvaluasi()
+};
+
+// Quiz data
+const quizzes = {
+  alkana: [
+    { q: 'Sepotong senyawa hidrokarbon diketahui memiliki 14 atom hidrogen. Jika senyawa tersebut termasuk ke dalam kelompok alkana, berapakah jumlah atom karbon di dalamnya?', opts: ['4','5','6','7','8'], ans: 2, explanation: 'Rumus alkana: CₙH₂ₙ₊₂. H=14, maka 2n+2=14 → n=6 (Heksana).' },
+    { q: 'Nama senyawa yang tidak sesuai aturan tata nama IUPAC: (1) 2-metilbutana, (2) 3-metilbutana, (3) 2,2-dimetilpropana', opts: ['(1) saja','(2) saja','(3) saja','(1) dan (3)','(2) dan (3)'], ans: 1, explanation: '"3-metilbutana" salah karena penomoran harus dari ujung terdekat cabang, sehingga yang benar adalah 2-metilbutana.' },
+    { q: 'Di antara senyawa berikut, yang memiliki titik didih paling tinggi adalah...', opts: ['n-pentana','2-metilbutana','2,2-dimetilpropana','n-heksana','2-metilpentana'], ans: 3, explanation: 'n-heksana (6C, rantai lurus) memiliki interaksi antarmolekul terkuat → titik didih tertinggi.' },
+    { q: 'Gas LPG merupakan campuran dua senyawa alkana utama, yaitu...', opts: ['Metana dan etana','Propana dan butana','Butana dan pentana','Etena dan propena','Metana dan propana'], ans: 1, explanation: 'LPG = Liquefied Petroleum Gas, terdiri dari propana (C₃H₈) dan butana (C₄H₁₀).' },
+    { q: 'Reaksi CH₄ + Cl₂ → CH₃Cl + HCl dengan sinar UV termasuk reaksi...', opts: ['Adisi','Eliminasi','Substitusi','Pembakaran','Polimerisasi'], ans: 2, explanation: 'Alkana (jenuh) mengalami reaksi substitusi — atom H diganti atom Cl.' }
+  ],
+  alkena: [
+    { q: 'Suatu alkena memiliki Mr = 56 (Ar C=12, H=1). Senyawa tersebut adalah...', opts: ['Etena','Propena','Butena','Pentena','Heksena'], ans: 2, explanation: 'CₙH₂ₙ: Mr = 14n = 56 → n=4, yaitu Butena.' },
+    { q: 'Nama IUPAC untuk CH₃–CH=C(CH₃)–CH₂–CH₃ adalah...', opts: ['2-metil-2-pentena','3-metil-2-pentena','3-metil-3-pentena','2-etil-2-butena','3-etil-2-butena'], ans: 1, explanation: 'Rantai terpanjang 5C melewati ikatan rangkap (pentena), nomor ikatan rangkap=2, cabang metil di C-3.' },
+    { q: 'Reaksi propena + HCl menurut Markovnikov menghasilkan...', opts: ['1-kloropropana','2-kloropropana','1,2-dikloropropana','Kloroetana','2-kloropropena'], ans: 1, explanation: 'Aturan Markovnikov: H masuk ke C rangkap yang punya H lebih banyak (C-1), Cl masuk ke C-2 → 2-kloropropana.' },
+    { q: 'Gas yang mempercepat pematangan buah adalah...', opts: ['Metana','Etena','Etuna','Propana','Butena'], ans: 1, explanation: 'Gas etena (etilen) adalah hormon tumbuhan alami pemicu pematangan buah.' },
+    { q: 'Isomer posisi dari 1-butena adalah...', opts: ['2-butena','2-metilpropena','Siklobutana','n-butana','2-metilbutana'], ans: 0, explanation: 'Isomer posisi = rumus dan rangka sama, posisi ikatan rangkap berbeda: 1-butena ↔ 2-butena.' }
+  ],
+  alkuna: [
+    { q: '1 mol hidrokarbon menghasilkan 3 mol CO₂. Jika termasuk alkuna, rumus molekulnya...', opts: ['C₃H₈','C₃H₆','C₃H₄','C₄H₆','C₂H₂'], ans: 2, explanation: '3 mol CO₂ → n=3. Alkuna CₙH₂ₙ₋₂ = C₃H₄ (Propuna).' },
+    { q: 'Nama IUPAC untuk CH≡C-CH(CH₃)-CH₃ adalah...', opts: ['3-metil-1-butuna','2-metil-3-butuna','Isopentuna','3-metilbutuna','1-pentuna'], ans: 0, explanation: 'Rantai terpanjang 4C (butuna), ikatan rangkap tiga di C-1, cabang metil di C-3.' },
+    { q: 'Gas asetilena digunakan untuk las karena...', opts: ['Bau khas sebagai indikator','Gas paling ringan','Pembakaran dengan O₂ menghasilkan suhu sangat tinggi','Tidak dapat terbakar','Mudah mencair'], ans: 2, explanation: 'Etuna + O₂ → api ~3000°C, cukup untuk melelehkan besi/baja.' },
+    { q: 'Mengubah 1 mol propuna menjadi propana membutuhkan H₂ sebanyak...', opts: ['0,5 mol','1 mol','1,5 mol','2 mol','3 mol'], ans: 3, explanation: 'Rangkap tiga → rangkap dua (1 mol H₂) → tunggal (1 mol H₂). Total = 2 mol H₂.' },
+    { q: 'Isomer fungsi dari 1-pentuna adalah...', opts: ['2-pentuna','3-metil-1-butuna','1,3-pentadiena','Siklopentana','2-metilbutana'], ans: 2, explanation: 'Alkuna berisomer fungsi dengan alkadiena (rumus sama CₙH₂ₙ₋₂). 1-pentuna (C₅H₈) ↔ 1,3-pentadiena (C₅H₈).' }
+  ]
+};
+
+function renderQuiz(type) {
+  const color = type === 'alkana' ? 'cyan' : type === 'alkena' ? 'pink' : 'green';
+  const title = type.charAt(0).toUpperCase() + type.slice(1);
+  let html = `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">${title}</h2><p class="text-${color}-400 text-sm mb-4">Latihan Soal (5 Pilihan Ganda)</p><div id="quiz-${type}" class="space-y-6">`;
+  quizzes[type].forEach((item, i) => {
+    html += `<div class="bg-slate-800/50 rounded-xl p-4"><p class="text-sm text-gray-200 font-medium mb-3">${i+1}. ${item.q}</p><div class="space-y-2" id="q-${type}-${i}">`;
+    const labels = ['A','B','C','D','E'];
+    item.opts.forEach((opt, j) => {
+      html += `<div class="quiz-option text-sm text-gray-300" onclick="selectAnswer('${type}',${i},${j})" id="opt-${type}-${i}-${j}">${labels[j]}. ${opt}</div>`;
+    });
+    html += `</div><div id="feedback-${type}-${i}" class="hidden mt-3 p-3 rounded-lg text-sm"></div></div>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
+function selectAnswer(type, qIdx, optIdx) {
+  const q = quizzes[type][qIdx];
+  const labels = ['A','B','C','D','E'];
+  // Disable all options for this question
+  for (let j = 0; j < q.opts.length; j++) {
+    const el = document.getElementById(`opt-${type}-${qIdx}-${j}`);
+    el.style.pointerEvents = 'none';
+    if (j === q.ans) el.classList.add('correct');
+    else if (j === optIdx && j !== q.ans) el.classList.add('wrong');
+  }
+  const fb = document.getElementById(`feedback-${type}-${qIdx}`);
+  fb.classList.remove('hidden');
+  if (optIdx === q.ans) {
+    fb.className = 'mt-3 p-3 rounded-lg text-sm bg-green-900/30 border border-green-800/50 text-green-300';
+    fb.innerHTML = `✅ <strong>Benar!</strong> ${q.explanation}`;
+  } else {
+    fb.className = 'mt-3 p-3 rounded-lg text-sm bg-red-900/30 border border-red-800/50 text-red-300';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban benar: ${labels[q.ans]}. ${q.explanation}`;
+  }
+}
+
+// Evaluasi (25 soal)
+const evalQuestions = [
+  { q:'Rumus umum alkana adalah...', opts:['CₙH₂ₙ₊₂','CₙH₂ₙ','CₙH₂ₙ₋₂','CₙHₙ','CₙH₂ₙ₊₁'], ans:0 },
+  { q:'Alkena memiliki ikatan...', opts:['Tunggal','Rangkap dua','Rangkap tiga','Ion','Koordinasi'], ans:1 },
+  { q:'Senyawa C₃H₄ termasuk golongan...', opts:['Alkana','Alkena','Alkuna','Sikloalkana','Aromatik'], ans:2 },
+  { q:'Reaksi khas alkana adalah...', opts:['Adisi','Polimerisasi','Substitusi','Oksidasi','Reduksi'], ans:2 },
+  { q:'Gas elpiji (LPG) mengandung...', opts:['Metana & etana','Propana & butana','Pentana & heksana','Etena & propena','Oktana & nonana'], ans:1 },
+  { q:'Nama IUPAC untuk CH₃-CH₂-CH₂-CH₃ adalah...', opts:['Metana','Etana','Propana','Butana','Pentana'], ans:3 },
+  { q:'Alkena dengan Mr=42 (C=12,H=1) adalah...', opts:['Etena','Propena','Butena','Pentena','Heksena'], ans:1 },
+  { q:'Etuna dikenal juga sebagai gas...', opts:['Alam','Karbit','Elpiji','Freon','Neon'], ans:1 },
+  { q:'Jumlah mol H₂ untuk mengubah 1 mol etuna menjadi etana...', opts:['1','2','3','4','0,5'], ans:1 },
+  { q:'Isomer rangka dimulai pada alkana dengan jumlah C...', opts:['2','3','4','5','6'], ans:2 },
+  { q:'Aturan Markovnikov berlaku pada reaksi...', opts:['Substitusi alkana','Adisi HX pada alkena','Pembakaran','Eliminasi','Polimerisasi'], ans:1 },
+  { q:'Polietilena terbuat dari monomer...', opts:['Metana','Etena','Propana','Butuna','Etuna'], ans:1 },
+  { q:'Isomer geometri (cis-trans) terjadi pada...', opts:['Alkana','Alkuna','Alkena','Semua hidrokarbon','Tidak ada'], ans:2 },
+  { q:'Pembakaran sempurna hidrokarbon menghasilkan...', opts:['CO + H₂','CO₂ + H₂O','C + H₂O','CO₂ + H₂','CO + H₂O'], ans:1 },
+  { q:'Alkuna berisomer fungsi dengan...', opts:['Alkana','Alkena','Alkadiena','Sikloalkana','Aromatik'], ans:2 },
+  { q:'Titik didih alkana meningkat jika...', opts:['Jumlah C berkurang','Rantai makin bercabang','Jumlah C bertambah','Mr berkurang','Ikatan makin rangkap'], ans:2 },
+  { q:'Reaksi cracking pada alkana termasuk reaksi...', opts:['Adisi','Substitusi','Eliminasi','Polimerisasi','Netralisasi'], ans:2 },
+  { q:'Gas etena berfungsi sebagai hormon untuk...', opts:['Pertumbuhan akar','Pematangan buah','Pembungaan','Fotosintesis','Respirasi'], ans:1 },
+  { q:'Senyawa C₅H₁₂ memiliki jumlah isomer sebanyak...', opts:['1','2','3','4','5'], ans:2 },
+  { q:'Suhu api las asetilena mencapai sekitar...', opts:['500°C','1000°C','2000°C','3000°C','5000°C'], ans:3 },
+  { q:'Rumus molekul butena adalah...', opts:['C₄H₁₀','C₄H₈','C₄H₆','C₄H₄','C₄H₁₂'], ans:1 },
+  { q:'Reaksi adisi pada alkena mengubah ikatan rangkap menjadi...', opts:['Rangkap tiga','Rangkap dua','Tunggal','Ion','Tidak berubah'], ans:2 },
+  { q:'Air bromin (cokelat) menjadi bening bila ditambah...', opts:['Alkana','Alkena','Gas mulia','Air','NaCl'], ans:1 },
+  { q:'Nama 2-metilpropena memiliki berapa atom karbon?', opts:['3','4','5','6','7'], ans:1 },
+  { q:'Deret homolog adalah senyawa yang berbeda...', opts:['Gugus fungsi','Satu CH₂','Fase','Warna','Bau'], ans:1 }
+];
+
+const evalAnswerKey = evalQuestions.map(q => q.ans);
+
+function renderEvaluasi() {
+  return `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">📝 Evaluasi</h2><p class="text-gray-400 text-sm mb-4">25 Soal Pilihan Ganda</p><div id="eval-login" class="eval-container bg-slate-800/50 rounded-xl p-6 max-w-md"><h3 class="font-semibold text-white mb-4">Login Evaluasi</h3><div class="space-y-3"><div><label class="text-sm text-gray-400 block mb-1" for="eval-name">Nama Lengkap</label><input type="text" id="eval-name" placeholder="Masukkan nama lengkap"></div><div><label class="text-sm text-gray-400 block mb-1" for="eval-class">Kelas</label><input type="text" id="eval-class" placeholder="Contoh: XII IPA 1"></div><div><label class="text-sm text-gray-400 block mb-1" for="eval-code">Kode Akses</label><input type="password" id="eval-code" placeholder="Masukkan kode akses"></div><button onclick="startEval()" class="w-full mt-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:opacity-90 transition">Mulai Evaluasi</button></div></div><div id="eval-content" class="hidden"></div></div>`;
+}
+
+let evalState = { answers: new Array(25).fill(-1), submitted: false };
+
+function startEval() {
+  const name = document.getElementById('eval-name').value.trim();
+  const kelas = document.getElementById('eval-class').value.trim();
+  const code = document.getElementById('eval-code').value.trim();
+  if (!name || !kelas || !code) {
+    // Show inline error
+    let err = document.getElementById('eval-error');
+    if (!err) {
+      err = document.createElement('p');
+      err.id = 'eval-error';
+      err.className = 'text-red-400 text-sm mt-2';
+      document.getElementById('eval-login').appendChild(err);
+    }
+    err.textContent = 'Harap isi semua kolom!';
+    return;
+  }
+  if (code !== '2025') {
+    let err = document.getElementById('eval-error');
+    if (!err) {
+      err = document.createElement('p');
+      err.id = 'eval-error';
+      err.className = 'text-red-400 text-sm mt-2';
+      document.getElementById('eval-login').appendChild(err);
+    }
+    err.textContent = 'Kode akses salah!';
+    return;
+  }
+  document.getElementById('eval-login').classList.add('hidden');
+  const container = document.getElementById('eval-content');
+  container.classList.remove('hidden');
+  evalState = { answers: new Array(25).fill(-1), submitted: false, name, kelas };
+  renderEvalQuestions(container);
+}
+
+function renderEvalQuestions(container) {
+  const labels = ['A','B','C','D','E'];
+  let html = `<div class="mb-4 p-3 bg-slate-800/50 rounded-lg flex justify-between items-center"><span class="text-sm text-gray-300">👤 ${evalState.name} | ${evalState.kelas}</span><button onclick="submitEval()" class="px-4 py-1.5 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition">Selesai & Kumpulkan</button></div><div class="space-y-4">`;
+  evalQuestions.forEach((item, i) => {
+    html += `<div class="bg-slate-800/50 rounded-xl p-4" id="eval-q-${i}"><p class="text-sm text-gray-200 font-medium mb-3">${i+1}. ${item.q}</p><div class="space-y-1.5">`;
+    item.opts.forEach((opt, j) => {
+      html += `<div class="quiz-option text-sm text-gray-300 ${evalState.answers[i]===j?'selected':''}" onclick="selectEvalAnswer(${i},${j})" id="eval-opt-${i}-${j}">${labels[j]}. ${opt}</div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `</div><div class="mt-4 text-center"><button onclick="submitEval()" class="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition">Selesai & Kumpulkan</button></div>`;
+  container.innerHTML = html;
+}
+
+function selectEvalAnswer(qIdx, optIdx) {
+  if (evalState.submitted) return;
+  evalState.answers[qIdx] = optIdx;
+  const labels = ['A','B','C','D','E'];
+  for (let j = 0; j < 5; j++) {
+    const el = document.getElementById(`eval-opt-${qIdx}-${j}`);
+    if (el) { el.classList.toggle('selected', j === optIdx); }
+  }
+}
+
+function submitEval() {
+  if (evalState.submitted) return;
+  const unanswered = evalState.answers.filter(a => a === -1).length;
+  if (unanswered > 0) {
+    // Show inline warning
+    let warn = document.getElementById('eval-warn');
+    if (!warn) {
+      warn = document.createElement('div');
+      warn.id = 'eval-warn';
+      warn.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 bg-yellow-900/90 border border-yellow-700 text-yellow-200 px-4 py-2 rounded-lg text-sm z-50';
+      document.body.appendChild(warn);
+      setTimeout(() => warn.remove(), 3000);
+    }
+    warn.textContent = `Masih ada ${unanswered} soal yang belum dijawab!`;
+    return;
+  }
+  evalState.submitted = true;
+  let score = 0;
+  const labels = ['A','B','C','D','E'];
+  evalQuestions.forEach((item, i) => {
+    if (evalState.answers[i] === item.ans) score++;
+    for (let j = 0; j < 5; j++) {
+      const el = document.getElementById(`eval-opt-${i}-${j}`);
+      if (el) {
+        el.style.pointerEvents = 'none';
+        if (j === item.ans) el.classList.add('correct');
+        else if (j === evalState.answers[i] && j !== item.ans) el.classList.add('wrong');
+      }
+    }
+  });
+  const nilai = Math.round((score / 25) * 100);
+  const container = document.getElementById('eval-content');
+  const resultDiv = document.createElement('div');
+  resultDiv.className = 'mb-4 p-5 bg-gradient-to-r from-cyan-900/40 to-blue-900/40 rounded-xl border border-cyan-800/30 text-center';
+  resultDiv.innerHTML = `<h3 class="text-xl font-bold text-white">Hasil Evaluasi</h3><p class="text-4xl font-black mt-2 ${nilai>=75?'text-green-400':'text-red-400'}">${nilai}</p><p class="text-gray-400 text-sm">Benar: ${score}/25</p><p class="text-gray-500 text-xs mt-1">${evalState.name} | ${evalState.kelas}</p>`;
+  container.insertBefore(resultDiv, container.firstChild);
+}
+
+function showContent(key) {
+  const area = document.getElementById('content-area');
+  if (contentData[key]) {
+    area.innerHTML = contentData[key]();
+    area.scrollTop = 0;
+    lucide.createIcons();
+  }
+}
+
+// Init
+populateModelSelect();
+updateModel();
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0903195498a8de9',t:'MTc4MTAwODcwOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
