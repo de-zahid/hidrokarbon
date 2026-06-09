@@ -90,14 +90,14 @@ html, body { height: 100%; margin: 0; overflow: hidden; }
     <div class="h-full flex"><!-- Column 1: Navigation -->
      <div class="w-64 min-w-[220px] bg-[#0d1221] border-r border-slate-800 flex flex-col h-full overflow-y-auto">
       <div class="p-4 border-b border-slate-800"><button onclick="showHome()" class="flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition mb-2"><i data-lucide="home" class="w-4 h-4"></i> Beranda</button>
-       <h2 class="text-lg font-bold text-white">Menu</h2>
+       <h2 class="text-lg font-bold text-white">HIDROKARBON</h2>
       </div>
       <nav class="flex-1 py-2">
        <div class="nav-item px-4 py-2 text-sm" onclick="showContent('tujuan')">
         <i data-lucide="target" class="w-4 h-4 inline mr-2"></i>Tujuan Pembelajaran
        </div>
        <div class="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider mt-2">
-        Sub Pokok Materi
+        Sub Pokok Bahasan
        </div>
        <div>
         <div class="nav-item px-4 py-2 text-sm flex justify-between items-center" onclick="toggleSub('alkana')">
@@ -360,7 +360,7 @@ function toggleFullModel() {
 
 // Content rendering
 const contentData = {
-  tujuan: () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-4">🎯 Tujuan Pembelajaran</h2><div class="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-xl p-5 border border-cyan-800/30"><p class="text-gray-200 leading-relaxed">Peserta didik mampu <strong class="text-cyan-300">menjelaskan senyawa karbon dan makromolekul</strong> serta <strong class="text-cyan-300">penerapannya dalam kehidupan sehari-hari</strong>.</p></div><h3 class="text-lg font-semibold text-white mt-6 mb-3">📚 Sub Pokok Materi:</h3><div class="space-y-2"><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">1</span><span>Alkana (Ikatan Tunggal)</span></div><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-pink-500/20 text-pink-400 text-sm font-bold">2</span><span>Alkena (Ikatan Rangkap Dua)</span></div><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-green-500/20 text-green-400 text-sm font-bold">3</span><span>Alkuna (Ikatan Rangkap Tiga)</span></div></div></div>`,
+  tujuan: () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-4">🎯 Tujuan Pembelajaran</h2><div class="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-xl p-5 border border-cyan-800/30"><p class="text-gray-200 leading-relaxed">Peserta didik mampu <strong class="text-cyan-300">menjelaskan senyawa karbon dan makromolekul</strong> serta <strong class="text-cyan-300">penerapannya dalam kehidupan sehari-hari</strong>.</p></div><h3 class="text-lg font-semibold text-white mt-6 mb-3">📚 Sub Pokok Bahasan :</h3><div class="space-y-2"><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-bold">1</span><span>Alkana (Ikatan Tunggal)</span></div><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-pink-500/20 text-pink-400 text-sm font-bold">2</span><span>Alkena (Ikatan Rangkap Dua)</span></div><div class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg"><span class="w-8 h-8 flex items-center justify-center rounded-full bg-green-500/20 text-green-400 text-sm font-bold">3</span><span>Alkuna (Ikatan Rangkap Tiga)</span></div></div></div>`,
 
   'alkana-pendahuluan': () => `<div class="fade-in"><h2 class="text-2xl font-bold text-white mb-1">Alkana</h2><p class="text-cyan-400 text-sm mb-4">Sub Unit 1 — Pendahuluan</p><div class="bg-slate-800/50 rounded-xl p-5"><h3 class="text-lg font-semibold text-white mb-3">A. Mengenal Senyawa</h3><p class="text-gray-300 leading-relaxed mb-3">Alkana adalah senyawa hidrokarbon <strong class="text-cyan-300">alifatik jenuh</strong>, yang berarti seluruh ikatan antar atom karbonnya merupakan <strong class="text-cyan-300">ikatan tunggal</strong> (C–C).</p><p class="text-gray-300 leading-relaxed">Karena seluruh tangannya telah terikat penuh oleh hidrogen atau karbon lain, alkana bersifat relatif stabil dan kurang reaktif dibandingkan alkena atau alkuna.</p><div class="mt-4 p-3 bg-cyan-900/20 rounded-lg border border-cyan-800/30"><p class="text-xs text-cyan-300">💡 Kata "jenuh" berarti semua ikatan karbon sudah "penuh" — tidak ada lagi ruang untuk menambah atom tanpa membuang yang sudah ada.</p></div></div></div>`,
 
